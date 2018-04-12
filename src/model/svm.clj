@@ -1,9 +1,8 @@
 (ns model.svm
   (:refer-clojure :exclude (replace))
   (:import [libsvm svm_node svm_parameter svm_problem svm])
-  (:require [clojure.edn :as edn]
-            [clojure.java.io :refer [file reader writer]]
-            [clojure.string :as cstr]))
+  (:require [clojure.string :as cstr]
+            [taoensso.timbre :as log]))
 
 
 ;; Thanks to:
@@ -43,10 +42,13 @@
     (set! (. node value) value)
     node))
 
-(defn svm-node
+(defn feature-node
   "Make a seq of LibSVM nodes."
   [[label features]]
-  (map (partial apply make-node) features))
+  ;; HACK
+  (if (map? features)
+    (map (partial apply make-node) features)
+    (map-indexed (fn [i f] (apply make-node [i f])) features)))
 
 (defn svm-params
   "Return SVM parameters."
@@ -88,15 +90,14 @@
     (set! (. problem l) (count records))
     (set! (. problem y) (-> (map first records)
                             (double-array)))
-    (set! (. problem x) (->> (map svm-node records)
+    (set! (. problem x) (->> (map feature-node records)
                              (map into-array)
                              (into-array)))
     problem))
 
 (defn train
   "Train a SVM model with `records` according to optional `parameters`
-
-   Record input format `[label [features]]`"
+   Accepts either vector of features or spare-map of features"
   ([records]
    (train records nil))
   ([records parameters]
@@ -109,6 +110,6 @@
 (defn predict
   "Predict the label of the `feature` with `model`."
   [model feature]
-  (->> (svm-node [nil feature])
+  (->> (feature-node [nil feature])
        (into-array)
        (svm/svm_predict model)))
