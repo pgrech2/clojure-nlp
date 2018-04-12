@@ -1,48 +1,15 @@
 # clojure-nlp
 
-TODO: Brief description
-
-
-
-## Releases and Dependency Information
-
-* Releases are published to TODO_LINK
-
-* Latest stable release is TODO_LINK
-
-* All released versions TODO_LINK
-
-[Leiningen] dependency information:
-
-    [clojure-nlp "0.1.0-SNAPSHOT"]
-
-[Maven] dependency information:
-
-    <dependency>
-      <groupId>clojure-nlp</groupId>
-      <artifactId>clojure-nlp</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
-    </dependency>
-
-[Leiningen]: http://leiningen.org/
-[Maven]: http://maven.apache.org/
+Clojure repository for various NLP models and tooling for working with your data.
 
 
 
 ## Usage
 
-TODO
+Data Protocol for loading, transforming, tokenizing and analyzing your data.
 
+Topic model LDA: Using Mallet LDA to build a topic model along with various helper functions for extracting information. Credits in mallet-lda.clj
 
+TFIDF: Term Frequency and Term Frequency - Inverse Document Frequency implementation
 
-## Change Log
-
-* Version 0.1.0-SNAPSHOT
-
-
-
-## Copyright and License
-
-Copyright © 2018 TODO_INSERT_NAME
-
-TODO: [Choose a license](http://choosealicense.com/)
+SVM: (in progress). Credits in svm.clj
