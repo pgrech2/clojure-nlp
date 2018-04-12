@@ -16,7 +16,7 @@
   [[doc-id term freq term-count]]
   [doc-id (double (/ freq term-count))])
 
-(defn train-term-frequency
+(defn term-frequency
   "Return term frequency by document for corpus of term vectors."
   [documents]
   (->> documents
