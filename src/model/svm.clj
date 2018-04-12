@@ -1,8 +1,7 @@
 (ns model.svm
   (:refer-clojure :exclude (replace))
   (:import [libsvm svm_node svm_parameter svm_problem svm])
-  (:require [clojure.string :as cstr]
-            [taoensso.timbre :as log]))
+  (:require [clojure.string :as cstr]))
 
 
 ;; Thanks to:
