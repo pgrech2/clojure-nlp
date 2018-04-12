@@ -8,6 +8,7 @@
             [taoensso.timbre :as log]
             [tools.data :as d]
             [tools.io :as io]
+            [model.svm :as svm]
             [model.tfidf :as tfidf]
             [model.topic-model :as tm]))
 
@@ -20,7 +21,7 @@
   "Constructs a system map suitable for interactive development."
   []
   (component/system-map
-   :data (d/loader {:file   data-file
+   :data (d/loader {:file data-file
                     :parse  (partial io/read-file #"\t")})))
 
 (set-init (fn [_] (dev-system)))
@@ -52,6 +53,9 @@
   (->> (d/records (:data sys) my-transform my-tokenizer my-analyzer)
        (map-indexed (fn [i {:keys [text term-vector]}]
                       [i term-vector]))))
+
+(defn records [sys]
+  (d/records (:data sys) identity))
 
 
 ;; Example of TFIDF
