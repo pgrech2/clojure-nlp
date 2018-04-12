@@ -104,7 +104,7 @@
                                 parameters)
          problem    (svm-problem records)]
      (svm/svm_check_parameter problem svm-params)
-     (svm/svm_train problem params))))
+     (svm/svm_train problem svm-params))))
 
 (defn predict
   "Predict the label of the `feature` with `model`."
