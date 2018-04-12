@@ -49,7 +49,7 @@
               (into []))))
 
 (defn r8 [sys]
-  (->> (d/records (:data sys) my-transform my-tokenizer)
+  (->> (d/records (:data sys) my-transform my-tokenizer my-analyzer)
        (map-indexed (fn [i {:keys [text term-vector]}]
                       [i term-vector]))))
 
