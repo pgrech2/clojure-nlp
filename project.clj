@@ -4,6 +4,7 @@
 
                  ;; Clojure Community Libraries
                  [com.stuartsierra/component "0.3.2"]
+                 [com.stuartsierra/frequencies "0.1.0"]
                  [com.taoensso/timbre "4.7.4"]
 
                  ;; NLP Libraries

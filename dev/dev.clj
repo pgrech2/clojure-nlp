@@ -5,9 +5,11 @@
             [clojure.tools.namespace.repl :refer [refresh refresh-all clear]]
             [com.stuartsierra.component :as component]
             [com.stuartsierra.component.repl :refer [reset set-init start stop system]]
+            [com.stuartsierra.frequencies :as freq]
             [taoensso.timbre :as log]
             [tools.data :as d]
             [tools.io :as io]
+            [tools.helpers :as help]
             [model.svm :as svm]
             [model.tfidf :as tfidf]
             [model.topic-model :as tm]))
@@ -44,8 +46,7 @@
 
 (defn my-analyzer [{:keys [term-vector] :as record}]
   (assoc record :term-vector
-         (->> term-vector
-              (set)
+         (->> (set term-vector)
               (remove stopwords)
               (into []))))
 
@@ -55,7 +56,7 @@
                       [i term-vector]))))
 
 (defn records [sys]
-  (d/records (:data sys) identity))
+  (d/records (:data sys)))
 
 
 ;; Example of TFIDF
@@ -67,3 +68,11 @@
 
 ;; Data analysis
 ;; http://ana.cachopo.org/datasets-for-single-label-text-categorization
+
+
+;; SVM Example
+
+;; (defn r8 [sys]
+;;   (->> (d/records (:data sys) my-transform my-tokenizer my-analyzer)
+;;        (map-indexed (fn [i {:keys [text term-vector]}]
+;;                       [i term-vector]))))
