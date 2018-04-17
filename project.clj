@@ -1,5 +1,5 @@
 (defproject clojure-nlp "0.1.0-SNAPSHOT"
-  :description "Library to experiment with NLP in Clojure"
+  :description "Clojure library for working with text data"
   :dependencies [[org.clojure/clojure "1.9.0-alpha16"]
 
                  ;; Clojure Community Libraries
