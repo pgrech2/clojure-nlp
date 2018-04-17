@@ -1,4 +1,4 @@
-(ns model.tfidf)
+(ns model.text)
 
 
 (defn document-term-frequency

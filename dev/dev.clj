@@ -7,12 +7,13 @@
             [com.stuartsierra.component.repl :refer [reset set-init start stop system]]
             [com.stuartsierra.frequencies :as freq]
             [taoensso.timbre :as log]
-            [tools.data :as d]
-            [tools.io :as io]
-            [tools.helpers :as help]
             [model.svm :as svm]
-            [model.tfidf :as tfidf]
-            [model.topic-model :as tm]))
+            [model.text :as text]
+            [model.topic-model :as tm]
+
+            [clojure-data.io :as io]
+            [clojure-data.load :as ld]
+            [clojure-data.helpers :as help]))
 
 ;; Do not try to load source code from 'resources' directory
 (clojure.tools.namespace.repl/set-refresh-dirs "dev" "src" "test")
@@ -23,7 +24,7 @@
   "Constructs a system map suitable for interactive development."
   []
   (component/system-map
-   :data (d/loader {:file data-file
+   :data (ld/loader {:file data-file
                     :parse  (partial io/read-file #"\t")})))
 
 (set-init (fn [_] (dev-system)))
@@ -51,16 +52,16 @@
               (into []))))
 
 (defn r8 [sys]
-  (->> (d/records (:data sys) my-transform my-tokenizer my-analyzer)
+  (->> (ld/records (:data sys) my-transform my-tokenizer my-analyzer)
        (map-indexed (fn [i {:keys [text term-vector]}]
                       [i term-vector]))))
 
 (defn records [sys]
-  (d/records (:data sys)))
+  (ld/records (:data sys)))
 
 
 ;; Example of TFIDF
-;; (def tfidf (tfidf/train (r8 system)))
+(def tfidf (text/tfidf (r8 system)))
 
 ;; Example of LDA Topic Model on R8 Corpus:
 ;; (def lda (tm/train (r8 system)))

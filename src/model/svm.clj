@@ -107,8 +107,8 @@
      (svm/svm_train problem svm-params))))
 
 (defn predict
-  "Predict the label of the `feature` with `model`."
-  [model feature]
-  (->> (feature-node [nil feature])
+  "Predict the label for `features` with `model`."
+  [model features]
+  (->> (feature-node [nil features])
        (into-array)
        (svm/svm_predict model)))

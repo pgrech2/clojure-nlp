@@ -17,5 +17,6 @@
                  ;; SVM
                  [tw.edu.ntu.csie/libsvm "3.17"]]
   :profiles {:dev {:dependencies [[org.clojure/tools.namespace "0.2.11"]
-                                  [com.stuartsierra/component.repl "0.2.0"]]
+                                  [com.stuartsierra/component.repl "0.2.0"]
+                                  [clojure-data "0.1.0-SNAPSHOT"]]
                    :source-paths ["dev"]}})
