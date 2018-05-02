@@ -7,9 +7,9 @@
             [com.stuartsierra.component.repl :refer [reset set-init start stop system]]
             [com.stuartsierra.frequencies :as freq]
             [taoensso.timbre :as log]
-            [model.svm :as svm]
-            [model.text :as text]
-            [model.topic-model :as tm]
+            [clojure-nlp.svm :as svm]
+            [clojure-nlp.text :as text]
+            [clojure-nlp.topic-model :as tm]
 
             [clojure-data.io :as io]
             [clojure-data.load :as ld]
@@ -61,7 +61,7 @@
 
 
 ;; Example of TFIDF
-(def tfidf (text/tfidf (r8 system)))
+;; (def tfidf (text/tfidf (r8 system)))
 
 ;; Example of LDA Topic Model on R8 Corpus:
 ;; (def lda (tm/train (r8 system)))
