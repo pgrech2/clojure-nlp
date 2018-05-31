@@ -1,4 +1,4 @@
-(ns model.text)
+(ns clojure-nlp.text)
 
 
 (defn document-term-frequency

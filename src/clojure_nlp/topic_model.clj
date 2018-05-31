@@ -1,5 +1,5 @@
-(ns model.topic-model
-  (:require [model.topic-model.mallet-lda :as lda]))
+(ns clojure-nlp.topic-model
+  (:require [clojure-nlp.topic-model.mallet-lda :as lda]))
 
 
 (defn summarize

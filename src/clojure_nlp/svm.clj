@@ -1,4 +1,4 @@
-(ns model.svm
+(ns clojure-nlp.svm
   (:refer-clojure :exclude (replace))
   (:import [libsvm svm_node svm_parameter svm_problem svm])
   (:require [clojure.string :as cstr]))

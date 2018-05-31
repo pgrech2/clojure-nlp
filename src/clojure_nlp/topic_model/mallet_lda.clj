@@ -1,4 +1,4 @@
-(ns model.topic-model.mallet-lda
+(ns clojure-nlp.topic-model.mallet-lda
   (:import [cc.mallet.types
             Alphabet
             FeatureSequence

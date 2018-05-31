@@ -2,11 +2,13 @@
   (:require [clojure.set :as cset]
             [clojure.string :as cstr]
             [clojure.java.io :as jio]
+            [clojure.spec.alpha :as s]
             [clojure.tools.namespace.repl :refer [refresh refresh-all clear]]
             [com.stuartsierra.component :as component]
             [com.stuartsierra.component.repl :refer [reset set-init start stop system]]
             [com.stuartsierra.frequencies :as freq]
             [taoensso.timbre :as log]
+
             [clojure-nlp.svm :as svm]
             [clojure-nlp.text :as text]
             [clojure-nlp.topic-model :as tm]
@@ -77,3 +79,27 @@
 ;;   (->> (d/records (:data sys) my-transform my-tokenizer my-analyzer)
 ;;        (map-indexed (fn [i {:keys [text term-vector]}]
 ;;                       [i term-vector]))))
+
+
+
+(defn default-config [config]
+  (when (clojure.spec.alpha/valid? ::config config)
+    true))
+
+(def temp (default-config {:a "a"}))
+
+(s/def ::config map?)
+
+
+(defmulti greeting
+  "This is another way"
+  "language"
+  ;;(fn[x] (x "language"))
+  )
+
+                                        ;params is not used, so we could have used [_]
+(defmethod greeting "English" [params]
+  "Hello!")
+
+(defmethod greeting "French" [params]
+  "Bonjour!")
